@@ -24,13 +24,8 @@ public class CarController {
     }
 
     @GetMapping("cars")
-    public String countCars(@RequestParam(name = "count", required = false) Integer count, Model model) {
-        List<Car> cars;
-        if (count == null || count > 5) {
-            cars = carService.getCars();
-        } else {
-            cars = carService.getCountOfCars(count);
-        }
+    public String countCars(@RequestParam(name = "count", defaultValue = "5") Integer count, Model model) {
+        List<Car> cars = carService.getCountOfCars(count);
         model.addAttribute("cars", cars);
         return "cars";
     }
